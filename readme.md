@@ -18,7 +18,7 @@ Antes de iniciar o processo automatizado, é necessário baixar os dados da Plat
 
 ## Passo 2: Baixar Identificadores Lattes
 
-O primeiro passo automatizado envolve a obtenção dos identificadores Lattes a partir dos nomes dos docentes baixados da plataforma Sucupira. O script `download_id_lattes.py` executa esse processo. Ele acessa a Plataforma Lattes, realiza consultas por nome e grava arquivos TXT com os identificadores Lattes correspondentes. Esse processo é repetido três vezes para lidar com possíveis problemas de conexão. O resultado é consolidado em um arquivo CSV chamado `capes-x-lattes.csv`, e os nomes não encontrados são listados no arquivo `missing_lattes.csv`.
+O primeiro passo automatizado envolve a obtenção dos identificadores Lattes a partir dos nomes dos docentes baixados da plataforma Sucupira. O script `download_id_lattes.py` executa esse processo. Ele acessa a Plataforma Lattes, realiza consultas por nome e grava arquivos TXT com os identificadores Lattes correspondentes. Esse processo é repetido três vezes para lidar com possíveis problemas de conexão. O resultado é consolidado no arquivo `capes-x-lattes.csv`, os nomes não encontrados são listados no arquivo `missing_lattes.csv` e os IDS para download no arquivo `idlattes_to_download.csv`.
 
 Exemplo de uso:
 ```
@@ -31,7 +31,7 @@ O próximo passo é baixar os currículos Lattes na forma de arquivos XML. O scr
 
 Exemplo de uso:
 ```
-python3 download_xml_lattes.py capes_x_lattes/capes-x-lattes.csv xml_lattes
+python3 download_xml_lattes.py capes_x_lattes/idlattes_to_download.csv xml_lattes
 ```
 
 

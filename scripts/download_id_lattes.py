@@ -255,4 +255,7 @@ def main():
     df_capes_lattes.to_csv(f"{str_download_folder_path}/capes-x-lattes.csv",
                            index=False)
 
+    df_capes_lattes['ID_CNPQ'].to_csv(f"{str_download_folder_path}/idlattes_to_download.csv",
+                                      index=False, header=False)
+
 main()
