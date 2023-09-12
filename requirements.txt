@@ -1,3 +1,5 @@
 # Project Dependencies
 selenium
 pandas
+chromedriver-py
+openpyxl
