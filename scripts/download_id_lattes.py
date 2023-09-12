@@ -75,7 +75,7 @@ def get_args():
     return parser.parse_args()
 
 def get_browser():
-    str_chromedriver_path = './chromedriver'
+#    str_chromedriver_path = './chromedriver'
 
     chrome_options = Options()
     chrome_options.add_argument('--no-sandbox')
@@ -84,8 +84,9 @@ def get_browser():
     chrome_options.add_argument('user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36')
     if B_HEADLESS:
         chrome_options.add_argument('headless')
-    return webdriver.Chrome(str_chromedriver_path,
-                            chrome_options=chrome_options)
+#   return webdriver.Chrome(str_chromedriver_path,
+#                        chrome_options=chrome_options)
+    return webdriver.Chrome(options=chrome_options)
 
 def get_lst_capes_to_download(df_capes,
                               str_download_folder_path):
@@ -119,8 +120,11 @@ def get_lst_idcnpq_by_name(browser, wait_browser, str_name):
 
     browser.get(str_url_search)
 
-    browser.find_element_by_id('textoBusca').send_keys(str_name)
-    browser.find_element_by_id('botaoBuscaFiltros').click()
+#    browser.find_element_by_id('textoBusca').send_keys(str_name)
+    browser.find_element(By.ID, 'textoBusca').send_keys(str_name)
+    
+#    browser.find_element_by_id('botaoBuscaFiltros').click()
+    browser.find_element(By.ID, 'botaoBuscaFiltros').click()
 
     wait_browser.until(ec.element_to_be_clickable((By.CLASS_NAME,
                                                    'paginacao')))
@@ -135,7 +139,8 @@ def get_lst_idcnpq_by_name(browser, wait_browser, str_name):
                                       browser.page_source)
 
         if not obj_match_idcnpq:
-            browser.find_element_by_class_name('m-logo').click()
+#            browser.find_element_by_class_name('m-logo').click()
+            browser.find_element(By.CLASS_NAME, 'm-logo').click()
             wait_browser.until(ec.number_of_windows_to_be(2))
             browser.switch_to.window(browser.window_handles[1])
 
@@ -228,6 +233,9 @@ def main():
     str_download_folder_path = args.output_folder
 
     str_download_folder_path = str_download_folder_path.rstrip('/')
+
+    if not os.path.exists(str_download_folder_path):
+        os.makedirs(str_download_folder_path)
 
     df_capes = get_df_capes(str_path_file_capes)
 
