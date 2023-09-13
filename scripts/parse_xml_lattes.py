@@ -13,9 +13,12 @@ import time
 import multiprocessing
 import pandas as pd
 
+import zipfile
+import os
+
 def convert_lst_prod_to_dataframe(lst_prod):
     df_producao = pd.DataFrame(lst_prod)
-
+    
     del (df_producao['NOME-PARA-CITACAO'], df_producao['ORDEM-DE-AUTORIA'],
          df_producao['NRO-ID-CNPQ'],
          df_producao['PALAVRA-CHAVE-1'], df_producao['PALAVRA-CHAVE-2'],
@@ -65,7 +68,7 @@ def convert_lst_prod_to_dataframe(lst_prod):
     del(df_producao['TITULO-DO-JORNAL-OU-REVISTA'],
         df_producao['TITULO-DO-PERIODICO-OU-REVISTA']
         )
-
+    
     return df_producao
 
 def dictify_flat(str_id, node):
@@ -170,13 +173,26 @@ def parse_files_get_lst_node(str_id, root, node_name):
 
     return lst_return
 
+def unzip_files(str_path_xml_files):
+    # Alteração feita por @thyagosimas em: 2023-09-13
+    # Comentário: Adicionei esta função porque os currículos estavam todos zipados e o sistema trabalha com eles em xml
+    # Não sei se essa foi a melhor decisão - ainda é necessário a validação do dono do script
+
+    lst_files = sorted(glob.glob(f"{str_path_xml_files}/*.zip"))
+    while lst_files:
+        str_file = lst_files.pop(0)
+        with zipfile.ZipFile(str_file,"r") as zip_ref:
+            zip_ref.extractall(str_path_xml_files)
+        os.rename(str_path_xml_files+"/curriculo.xml", str_file[:-3]+"xml")
 
 def main():
     args = get_args()
     str_path_xml_files = args.input_folder
+    
+    unzip_files(str_path_xml_files)
 
     lst_files = sorted(glob.glob(f"{str_path_xml_files}/*.xml"))
-
+    
     pool = multiprocessing.Pool()
     time_start = time.time()
     lst_lattes = pool.map(parse_files, lst_files)
@@ -194,8 +210,9 @@ def main():
     df_producao = convert_lst_prod_to_dataframe(lst_producao)
 
     df_dados_gerais = pd.DataFrame(lst_dados_gerais)
-    df_formacao = pd.DataFrame(lst_formacao)
 
+    df_formacao = pd.DataFrame(lst_formacao)
+    
     df_desambiguate = df_dados_gerais.merge(df_formacao,
                                             how='left',
                                             left_on='FILE-NAME',
@@ -204,3 +221,5 @@ def main():
     df_desambiguate = df_desambiguate.loc[:, ['FILE-NAME', 'NOME-COMPLETO',
                                               'ANO-DE-OBTENCAO-DO-TITULO',
                                               'NOME-INSTITUICAO']]
+
+main()
