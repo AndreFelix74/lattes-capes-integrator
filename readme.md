@@ -1,8 +1,25 @@
-# Projeto Diversidade na Ciência - Serrapilheira
+# Integrador Lattes-Capes
 
-Scripts para Baixar e Tratar Currículos da Plataforma Lattes do CNPq
+O Integrador Lattes-Capes é uma ferramenta em Python desenvolvida para relacionar os dados de docentes da Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (Capes) com seus respectivos perfis no Lattes, uma plataforma do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq). No Brasil, essas duas entidades são fundamentais para o monitoramento e avaliação da produção científica acadêmica.
 
-Este repositório contém um conjunto de scripts desenvolvidos no âmbito do projeto Diversidade na Ciência do Instituto Serrapilheria, visando estabelecer uma relação entre as informações da Plataforma Sucupira da Capes e os currículos na Plataforma Lattes do CNPq. O processo é dividido em uma etapa manual e quatro etapas automatizadas. A seguir, são detalhados os passos necessários para utilizar os scripts e realizar o relacionamento entre as bases de dados.
+## Objetivo
+O objetivo deste projeto é facilitar a integração dos dados da Capes com os perfis dos pesquisadores no Lattes, permitindo uma análise mais abrangente e precisa da produção científica brasileira. Ao relacionar os identificadores únicos dos docentes da Capes com seus respectivos perfis no Lattes, é possível enriquecer as análises sobre a produção acadêmica, proporcionando insights valiosos para pesquisadores, instituições de ensino e órgãos governamentais.
+
+
+O processo é dividido em uma etapa manual e quatro etapas automatizadas. A seguir, são detalhados os passos necessários para utilizar os scripts e realizar o relacionamento entre as bases de dados.
+
+## Funcionalidades
+- Descarga dos currículos Lattes.
+- Extração dos dados de produção científica dos perfis no Lattes.
+- Geração de tabelas de relação entre os identificadores da Capes e do Lattes.
+- Relacionamento dos dados da Capes com os identificadores do Lattes.
+
+## Como Usar
+Para utilizar o Integrador Lattes-Capes, siga as instruções abaixo:
+
+1. Clone este repositório em sua máquina local.
+1. Instale as dependências necessárias especificadas no arquivo requirements.txt.
+1. Execute os scripts Python conforme instruções abaixo.
 
 ## Pré-requisitos
 
