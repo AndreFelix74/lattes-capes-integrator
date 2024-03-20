@@ -129,3 +129,6 @@ Nem todos os nomes constantes na base da Capes são encontrados no Lattes; essa 
 - Os scripts `download_id_lattes.py` e `download_xml_lattes.py` têm mecanismos de tolerância a falhas e evitam duplicações de download.
 
 Através da execução sequencial desses scripts, é possível relacionar as informações da Plataforma Capes com os currículos da Plataforma Lattes, fornecendo uma visão mais completa dos dados dos docentes e facilitando análises e pesquisas futuras.
+
+## Licença
+Este projeto é licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
